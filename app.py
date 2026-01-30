@@ -686,7 +686,7 @@ def start_scheduler():
     scheduler.add_job(
         scheduled_login_job,
         "interval",
-        minutes=59,
+        minutes=29,
         id=LOGIN_JOB_ID,
         replace_existing=True,
         next_run_time=datetime.now(timezone.utc) + timedelta(minutes=59),
@@ -714,7 +714,7 @@ def start_scheduler():
 
 
     scheduler.start()
-    bump_next_login_run(59)
+    bump_next_login_run(29)
 
     log_sep("SCHEDULER")
     log("INFO  自动登录任务已启动：每 59 分钟刷新一次 token（以最后一次成功登录时间为准对齐 next_run_time）")
@@ -744,7 +744,7 @@ HTML = r"""
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>CMS 登录解封工具</title>
+  <title>HH🆚测试组🥰CMS 登录解封工具</title>
   <style>
     :root{
       --bg0:#070A12;
