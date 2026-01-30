@@ -592,7 +592,7 @@ def refresh_token_once(source: str = "manual", bump_schedule: bool = True):
         return False, str(e)
 
 
-def bump_next_login_run(minutes: int = 9):
+def bump_next_login_run(minutes: int = 3):
     """把下一次自动登录的 next_run_time 强制设为“现在 + minutes”，让倒计时与实际登录时间对齐。"""
     try:
         job = scheduler.get_job(LOGIN_JOB_ID)
@@ -686,7 +686,7 @@ def start_scheduler():
     scheduler.add_job(
         scheduled_login_job,
         "interval",
-        minutes=9,
+        minutes=3,
         id=LOGIN_JOB_ID,
         replace_existing=True,
         next_run_time=datetime.now(timezone.utc) + timedelta(minutes=59),
@@ -714,7 +714,7 @@ def start_scheduler():
 
 
     scheduler.start()
-    bump_next_login_run(9)
+    bump_next_login_run(3)
 
     log_sep("SCHEDULER")
     log("INFO  自动登录任务已启动：每 59 分钟刷新一次 token（以最后一次成功登录时间为准对齐 next_run_time）")
